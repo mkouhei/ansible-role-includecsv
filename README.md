@@ -40,7 +40,11 @@ ok: [localhost] => {
 
 ## Options
 
-ToDo
+| parameter | required | default | choices | comments                                                |
+|:----------|:---------|:--------|:--------|:--------------------------------------------------------|
+| src       | yes      |         |         | Speficy CSV file path.                                  |
+| delimiter | no       | '       |         | a one-character string to use as the field separator.   |
+| quotechar | no       | "       |         | a one-character string to use as the quoting character. |
 
 ## Examples
 
