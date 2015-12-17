@@ -1,0 +1,9 @@
+---
+galaxy_info:
+  author: Kouhei Maeda
+  description: includes variables from CSV file.
+  license: GPLv3+
+  min_ansible_version: 1.9
+  categories:
+    -
+  dependencies: []
