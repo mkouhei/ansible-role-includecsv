@@ -11,7 +11,7 @@ This module will load variables from a CSV file.
 Example task::
 
 ```yaml
-- include_csv: src=path/to/foo.csv
+- include_csv: src=path/to/fruits.csv
 ```
 
 The first line it will be read as the name of the parameter.
@@ -29,7 +29,7 @@ The variables named using file name without the extention.
 To use variable as follow
 
 ```yaml
-- debug: msg="{{ foo }}"
+- debug: msg="{{ fruits }}"
 ```
 
 ```python
