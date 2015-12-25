@@ -40,15 +40,23 @@ ok: [localhost] => {
 
 ## Options
 
-| parameter | required | default | choices | comments                                                |
-|:----------|:---------|:--------|:--------|:--------------------------------------------------------|
-| src       | yes      |         |         | Speficy CSV file path.                                  |
-| delimiter | no       | '       |         | a one-character string to use as the field separator.   |
-| quotechar | no       | "       |         | a one-character string to use as the quoting character. |
+| parameter | required | default | choices | comments                                                                                                                                      |
+|:----------|:---------|:--------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------|
+| src       | yes      |         |         | Speficy CSV file path. The path must be a absolute path or a relative path. (Not support detecting file name under roles/foo/files directory. |
+| delimiter | no       | '       |         | a one-character string to use as the field separator.                                                                                         |
+| quotechar | no       | "       |         | a one-character string to use as the quoting character.                                                                                       |
 
 ## Examples
 
-ToDo
+Use as like ``include_vars``.
+
+```yaml
+- include_csv: src=foo.csv
+```
+
+```yaml
+- include_csv: src=bar.csv delimiter="|" quotechar="'"
+```
 
 ## Requirements
 
