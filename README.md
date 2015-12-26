@@ -58,6 +58,16 @@ Use as like ``include_vars``.
 - include_csv: src=bar.csv delimiter="|" quotechar="'"
 ```
 
+### Load locally
+
+Appends ``connection`` and ``sudo``.
+
+```yaml
+- include:csv: src=bar.csv
+  connection: local
+  sudo: no
+```
+
 ## Requirements
 
 None.
