@@ -76,7 +76,9 @@ def _vars_dir(filepath):
 def convert(csvpath, delimiter, quotechar):
     key = _basename(csvpath)
     with open(csvpath, 'rb') as fobj:
-        reader = csv.DictReader(fobj, delimiter=delimiter, quotechar=quotechar)
+        reader = csv.DictReader(fobj,
+                                delimiter=delimiter,
+                                quotechar=quotechar)
         data = {'{0}'.format(key): [i for i in reader]}
     return data
 
@@ -84,6 +86,7 @@ def convert(csvpath, delimiter, quotechar):
 def main():
     module = AnsibleModule(
         argument_spec={
+            'src': dict(required=True),
             'delimiter': dict(required=False, default=','),
             'quotechar': dict(required=False, default='"'),
         },
