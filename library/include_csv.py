@@ -65,10 +65,6 @@ def _basename(filepath):
     return os.path.basename(os.path.splitext(filepath)[0])
 
 
-def _change_ext(filepath):
-    return '{0}.yml'.format(_basename(filepath))
-
-
 def _vars_dir(filepath):
     return os.path.join(os.path.dirname(os.path.dirname(filepath)), 'vars')
 
