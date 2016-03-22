@@ -4,6 +4,11 @@ galaxy_info:
   description: includes variables from CSV file.
   license: GPLv3+
   min_ansible_version: 1.9
+  platforms:
+    - name: GenericUNIX
+      versions:
+        - all
+        - any
   categories:
     - csv
-  dependencies: []
+dependencies: []
