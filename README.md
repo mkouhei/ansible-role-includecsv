@@ -1,21 +1,20 @@
 # Ansible Role: include_csv
 
-This role contains no tasks, but provides ``include_csv`` module which loads variables from a CSV file.
+This role contains no tasks, but provides the ``include_csv`` module which loads
+data from a CSV file.
 
 Ansible Galaxy Page: https://galaxy.ansible.com/detail#/role/6589
 
 ## include_csv module
 
-This module will load variables from a CSV file.
-
-Example task::
+Example task:
 
 ```yaml
 - include_csv: src=path/to/fruits.csv
 ```
 
-The first line it will be read as the name of the parameter.
-It will read the subsequent second line as data.::
+The first line of the CSV file must be a header containing a list of field
+names, for example:
 
 ```csv
 id,name,price
@@ -25,8 +24,13 @@ id,name,price
 3,durian,400
 ```
 
-The variables named using file name without the extention.
-To use variable as follow
+- `include_csv` reads the data into a list of dictionaries,
+  one dictionary per line.
+- The dictionary keys are the field names.
+- The data is stored in a variable whose name is the CSV file
+  name without the extension.
+
+For example, the data for the above CSV file can be accessed as follows:
 
 ```yaml
 - debug: msg="{{ fruits }}"
@@ -42,13 +46,13 @@ ok: [localhost] => {
 
 | parameter | required | default | choices | comments                                                                                                                                      |
 |:----------|:---------|:--------|:--------|:----------------------------------------------------------------------------------------------------------------------------------------------|
-| src       | yes      |         |         | Speficy CSV file path. The path must be a absolute path or a relative path. (Not support detecting file name under roles/foo/files directory. |
-| delimiter | no       | '       |         | a one-character string to use as the field separator.                                                                                         |
-| quotechar | no       | "       |         | a one-character string to use as the quoting character.                                                                                       |
+| src       | yes      |         |         | Specify the CSV file path. The path can be absolute or relative. (Detection of files under roles/foo/files is not supported.) |
+| delimiter | no       | '       |         | Single-character field separator.                                                                                         |
+| quotechar | no       | "       |         | Single-character quote character.                                                                                       |
 
 ## Examples
 
-Use as like ``include_vars``.
+Use ``include_vars`` as follows:
 
 ```yaml
 - include_csv: src=foo.csv
@@ -60,7 +64,11 @@ Use as like ``include_vars``.
 
 ### Load locally
 
-Appends ``connection`` and ``sudo``.
+In the previous examples the CSV file is loaded on every remote node
+targeted by the play.
+
+To load CSV data from a file on the Ansible control server,
+use `local_action` or `connection: local`, for example:
 
 ```yaml
 - include:csv: src=bar.csv
@@ -68,8 +76,33 @@ Appends ``connection`` and ``sudo``.
   sudo: no
 ```
 
-## Requirements
+### Load locally, only once
 
+There are two potential problems with the previous example (depending
+on the desired behaviour):
+- the local file is loaded *multiple times*; once for each target node
+- `ansible-playbook` output will appear to show the task running against every
+  target node
+
+To load CSV data *only once* from a file on the control server,
+use a separate play within your playbook which 
+targets localhost. Subsequent plays can access the data via `hostvars`, for
+example:
+
+```yaml
+- hosts: localhost
+  roles:
+    - role: mkouhei.include_csv
+  tasks:
+    - include_csv: src=fruits.csv
+
+- hosts: t1, t2
+  tasks:
+  - debug: msg="{{item.name}}"
+    with_items: "{{hostvars.localhost.fruits}}"
+```
+
+## Requirements
 None.
 
 ## Role variables
