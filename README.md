@@ -5,6 +5,20 @@ data from a CSV file.
 
 Ansible Galaxy Page: https://galaxy.ansible.com/mkouhei/include_csv/
 
+## install
+
+```bash
+$ virtualenv /path/to/venv
+$ /path/to/venv/bin/pip install ansible
+$ cd /path/to/your_playbook
+$ /path/to/venv/bin/ansible-galaxy install -p ./library mkouhei.include_csv
+```
+
+### usages
+
+Path ` -M library/mkouhei.include_csv/library` option to `ansible` or `ansible-playbook` command.
+
+
 ## include_csv module
 
 Example task:
