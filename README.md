@@ -3,7 +3,7 @@
 This role contains no tasks, but provides the ``include_csv`` module which loads
 data from a CSV file.
 
-Ansible Galaxy Page: https://galaxy.ansible.com/detail#/role/6589
+Ansible Galaxy Page: https://galaxy.ansible.com/mkouhei/include_csv/
 
 ## include_csv module
 
